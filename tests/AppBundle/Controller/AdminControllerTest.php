@@ -98,34 +98,46 @@ class AdminControllerTest extends TestCase
         $productHandler = new CreateUserHandler($entityManagerMock, $validatorMock, $passwordEncoder);
         $productHandler->handle($user);
     }
-//
-//    /**
-//     * @expectedException AppBundle\Exception\InvalidProductException
-//     */
-//    public function testAddFailProduct()
-//    {
-//        $product = new NewProductCommand();
-//        $product->name = 'Product name!';
-//        $product->description = 'Hi, I want to sell my new boat. It is my treasure so I will send it only to ppl that will take care about her! Only cash, no credits cards or coupons!';
-//        $product->price = 141.12;
-//
-//        $entityManagerMock = m::mock('Doctrine\ORM\EntityManager');
-//        $entityManagerMock->shouldNotReceive('persist');
-//        $entityManagerMock->shouldNotReceive('flush');
-//
-//        $validatorMock = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface');
-//
-//        $validatorMockCollection = m::mock('Symfony\Component\Validator\ConstraintViolationList');
-//        $validatorMockCollection->shouldReceive('count')->withNoArgs()->andReturn(2);
-//
-//        $validatorMock->shouldReceive('validate')->withArgs([$product])->once()
-//            ->andReturn($validatorMockCollection);
-//
-//        $productNotificationSenderMock = m::mock('AppBundle\Products\NewProductNotificationSender');
-//        $productNotificationSenderMock->shouldNotReceive('sendNewProductEmail');
-//        $productHandler = new NewProductHandler($entityManagerMock, $validatorMock, $productNotificationSenderMock);
-//        $productHandler->handle($product);
-//    }
+
+    /**
+     * FIAL test ;-)
+     *
+     * @expectedException AppBundle\Exception\InvalidUserException
+     */
+    public function testAddFailUser()
+    {
+        $user = new CreateUserCommand();
+        $user->name = 'Łukasz';
+        $user->surname = 'Malicki';
+        $user->phoneNumber = '+48 733 974 114';
+        $user->city = 'Katowice';
+        $user->street = 'Murckowska';
+        $user->zipCode = '40-881';
+        $user->flatNumber = '12';
+        $user->houseNumber = 12;
+        $user->password = 'qweluke';
+
+        $entityManagerMock = m::mock('Doctrine\ORM\EntityManager');
+        $entityManagerMock->shouldNotReceive('persist');
+        $entityManagerMock->shouldNotReceive('flush');
+
+        $validatorMock = m::mock('Symfony\Component\Validator\Validator\ValidatorInterface');
+
+        $validatorMockCollection = m::mock('Symfony\Component\Validator\ConstraintViolationList');
+        $validatorMockCollection->shouldReceive('count')->withNoArgs()->andReturn(2);
+
+        $validatorMock->shouldReceive('validate')->withArgs([$user])->once()
+            ->andReturn($validatorMockCollection);
+
+        $passwordEncoderInterface = m::mock('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface');
+        $passwordEncoder = m::mock('Symfony\Component\Security\Core\Encoder\UserPasswordEncoder');
+
+        $passwordEncoder->shouldReceive('encodePassword')->withAnyArgs()
+            ->andReturn($passwordEncoderInterface);
+
+        $productHandler = new CreateUserHandler($entityManagerMock, $validatorMock, $passwordEncoder);
+        $productHandler->handle($user);
+    }
 
     public function tearDown()
     {
