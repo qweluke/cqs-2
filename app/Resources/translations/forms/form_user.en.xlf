@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="form_user.submit">
+                <source>form_user.submit</source>
+                <target>Submit</target>
+            </trans-unit>
+            <trans-unit id="form_user.name">
+                <source>form_user.name</source>
+                <target>User name</target>
+            </trans-unit>
+            <trans-unit id="form_user.surname">
+                <source>form_user.surname</source>
+                <target>User surname</target>
+            </trans-unit>
+
+            <trans-unit id="form_user_profile.street">
+                <source>form_user_profile.street</source>
+                <target>Street</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.city">
+                <source>form_user_profile.city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.house_number">
+                <source>form_user_profile.house_number</source>
+                <target>House number</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.flat_number">
+                <source>form_user_profile.flat_number</source>
+                <target>Flat number</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.country">
+                <source>form_user_profile.country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.phone_number">
+                <source>form_user_profile.phone_number</source>
+                <target>Phone number</target>
+            </trans-unit>
+            <trans-unit id="form_user_profile.zip_code">
+                <source>form_user_profile.zip_code</source>
+                <target>Postal code</target>
+            </trans-unit>
+            <trans-unit id="form_user.username">
+                <source>form_user.username</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="form_user.password">
+                <source>form_user.password</source>
+                <target>Password</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
