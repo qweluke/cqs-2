@@ -39,14 +39,14 @@ class AdminDeleteUserControllerTest extends TestCase
         $emMock=m::mock(EntityManager::class);
         $emMock->shouldReceive('getRepository')->withArgs([User::class])->andReturn($repositoryMock);
         $emMock->shouldReceive('remove')->withArgs([$userEntity])->once();
-        $emMock->shouldReceive('flush')->withAnyArgs()->once();
+        $emMock->shouldReceive('flush')->withNoArgs()->once();
 
         $productHandler = new DeleteUserHandler($emMock);
         $productHandler->handle($user);
     }
 
     /**
-     * FIAL test ;-)
+     * User not found test ;-)
      *
      * @expectedException AppBundle\Exception\InvalidUserException
      */
@@ -65,6 +65,30 @@ class AdminDeleteUserControllerTest extends TestCase
 
         $productHandler = new DeleteUserHandler($emMock);
         $productHandler->handle($user);
+    }
+
+    /**
+     * FIAL test ;-)
+     *
+     * @expectedException \Exception()
+     */
+    public function testDeleteFial()
+    {
+        $user = new DeleteUserCommand();
+        $user->id = 1;
+
+        $userEntity = new User();
+
+        $repositoryMock = m::mock(UserRepository::class);
+        $repositoryMock->shouldReceive('find')->withArgs([1])->andReturn($userEntity);
+
+        $emMock=m::mock(EntityManager::class);
+        $emMock->shouldReceive('getRepository')->withArgs([User::class])->andReturn($repositoryMock);
+        $emMock->shouldReceive('remove')->withArgs([$userEntity])->once();
+        $emMock->shouldReceive('flush')->andThrow(new \Exception());
+
+        $productHandler = new DeleteUserHandler($emMock);
+        $this->assertFalse($productHandler->handle($user));
     }
 
     public function tearDown()

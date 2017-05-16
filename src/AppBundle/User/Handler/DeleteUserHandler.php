@@ -38,14 +38,14 @@ class DeleteUserHandler
     {
         $user = $this->em->getRepository(User::class)->find($userCommand->id);
 
-        if(!$user) {
+        if (!$user) {
             throw new InvalidUserException();
         }
 
         try {
             $this->em->remove($user);
             $this->em->flush();
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             return false;
         }
 
