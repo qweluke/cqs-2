@@ -1,0 +1,15 @@
+user_new_handler:
+    class: AppBundle\User\Handler\CreateUserHandler
+    autowire: true
+
+user_edit_handler:
+    class: AppBundle\User\Handler\EditUserHandler
+    autowire: true
+
+user_delete_handler:
+    class: AppBundle\User\Handler\DeleteUserHandler
+    autowire: true
+
+user_doctrine:
+    class: AppBundle\User\Query\DoctrineUsers
+    autowire: true
