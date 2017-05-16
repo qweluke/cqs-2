@@ -30,6 +30,7 @@ class CreateUserHandler
      * NewProductHandler constructor.
      * @param EntityManager $entityManager
      * @param ValidatorInterface $validator
+     * @param UserPasswordEncoder $passwordEncoder
      */
     public function __construct(EntityManager $entityManager, ValidatorInterface $validator, UserPasswordEncoder $passwordEncoder)
     {
@@ -76,7 +77,6 @@ class CreateUserHandler
         $user->setProfile($userProfile);
 
         $this->em->persist($user);
-        $this->em->persist($userProfile);
 
         $this->em->flush();
 

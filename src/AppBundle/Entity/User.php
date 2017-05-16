@@ -48,7 +48,7 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
     private $surname;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Profile", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Profile", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $profile;
 
@@ -100,6 +100,7 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
 
     public function __construct()
     {
+        $this->profile = new Profile();
         $this->roles = [self::ROLE_USER];
         $this->isActive = false;
         $this->isAccountNonExpired = true;
@@ -484,9 +485,10 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface
      */
     public function getFullAddress(): string
     {
-        $str = $this->getProfile()->getStreet() . ' ' . $this->getProfile()->getHouseNumber() . ' ' . $this->getProfile()->getFlatNumber() . PHP_EOL;
-        $str .= $this->getProfile()->getCity() . ', ' . $this->getProfile()->getZipCode();
-        $str .= !empty($this->getProfile()->getCountry()) ? PHP_EOL . $this->getProfile()->getCountry() : '';
+        $str = '';
+//        $str = $this->getProfile()->getStreet() . ' ' . $this->getProfile()->getHouseNumber() . ' ' . $this->getProfile()->getFlatNumber() . PHP_EOL;
+//        $str .= $this->getProfile()->getCity() . ', ' . $this->getProfile()->getZipCode();
+//        $str .= !empty($this->getProfile()->getCountry()) ? PHP_EOL . $this->getProfile()->getCountry() : '';
 
         return $str;
     }

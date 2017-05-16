@@ -3,6 +3,7 @@
 namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Profile;
 use AppBundle\Entity\User;
 use AppBundle\Products\Command\NewProductCommand;
 use AppBundle\Products\Handler\NewProductHandler;
@@ -35,15 +36,13 @@ class AdminControllerTest extends TestCase
 
         $entityManagerMock = m::mock('Doctrine\ORM\EntityManager');
         $entityManagerMock
-            ->shouldReceive('persist')->withArgs([$user])->twice()
+            ->shouldReceive('persist')->withArgs([$user])->once()
             ->with(m::on(function ($args) use ($user) {
                 if (!($args instanceof User)) {
                     return false;
                 }
-                if ($args->getName() !== $user->name ||
-                    $args->getSurname() !== $user->surname ||
-                    $args->getProfile()->getCity() !== $user->city ||
-                    $args->getProfile()->getPhoneNumber() !== $user->phoneNumber
+                if ($args->getName() !== $user->name || $args->getSurname() !== $user->surname ||
+                    $args->getProfile()->getCity() !== $user->city
                 ) {
                     return false;
                 }
@@ -63,7 +62,9 @@ class AdminControllerTest extends TestCase
 
         $passwordEncoderInterface = m::mock('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface');
         $passwordEncoder = m::mock('Symfony\Component\Security\Core\Encoder\UserPasswordEncoder');
-        $passwordEncoder->shouldReceive('encodePassword')->once()->withArgs([$user, $user->password])->andReturn($passwordEncoder);
+
+        $passwordEncoder->shouldReceive('encodePassword')->withAnyArgs()->once()
+            ->andReturn($passwordEncoderInterface);
 
         $productHandler = new CreateUserHandler($entityManagerMock, $validatorMock, $passwordEncoder);
         $productHandler->handle($user);
