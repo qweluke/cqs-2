@@ -41,8 +41,37 @@ class AdminControllerTest extends TestCase
                 if (!($args instanceof User)) {
                     return false;
                 }
-                if ($args->getName() !== $user->name || $args->getSurname() !== $user->surname ||
-                    $args->getProfile()->getCity() !== $user->city
+                /**
+                 * test User entity
+                 */
+                if ($args instanceof User &&
+                    $args->getName() !== $user->name ||
+                    $args->getSurname() !== $user->surname ||
+                    $args->getEmail() !== $user->email ||
+                    !empty($args->getFullAddress()) ||
+                    !is_array($args->getRoles()) ||
+                    !is_bool($args->getIsActive()) ||
+                    !is_bool($args->isEnabled()) ||
+                    !is_bool($args->getIsAccountNonExpired()) ||
+                    !is_bool($args->getIsAccountNonLocked())
+                ) {
+                    return false;
+                }
+
+                /**
+                 * test Profile entity
+                 */
+                if ($args->getProfile() instanceof Profile &&
+                    $args->getProfile()->getCity() !== $user->city ||
+                    $args->getProfile()->getStreet() !== $user->street ||
+                    $args->getProfile()->getFlatNumber() !== $user->flatNumber ||
+                    $args->getProfile()->getCountry() !== $user->country ||
+                    $args->getProfile()->getZipCode() !== $user->zipCode ||
+                    $args->getProfile()->getPhoneNumber() !== $user->phoneNumber ||
+                    $args->getProfile()->getHouseNumber() !== $user->houseNumber ||
+                    is_numeric($args->getProfile()->getId()) ||
+                    (!$args->getProfile()->getUser() instanceof User)
+
                 ) {
                     return false;
                 }
