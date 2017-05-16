@@ -17,7 +17,7 @@ class InvalidUserException extends HttpException
      * @param \Exception $previous The previous exception
      * @param int $code The internal exception code
      */
-    public function __construct($message = 'Product user.', \Exception $previous = null, $code = 0)
+    public function __construct($message = 'Invalid user.', \Exception $previous = null, $code = 0)
     {
         parent::__construct(Response::HTTP_BAD_REQUEST, $message, $previous, array(), $code);
     }

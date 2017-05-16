@@ -63,9 +63,6 @@ class EditUserHandler
 
         $user->setProfile($userProfile);
 
-        $this->em->persist($user);
-        $this->em->persist($userProfile);
-
         $this->em->flush();
 
         return $user->getId();
