@@ -1,44 +1,42 @@
-<<<<<<< HEAD
-.checkout
-=========
-
-A Symfony project created on May 15, 2017, 6:48 pm.
+Yet another CQS implementation ;-)
 =======
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/qweluke/cqs-2/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+A Symfony 3.2 project created on May 16, 2017, 8:53 am.
+This project requires PHP 7.x.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Project statistics
+Please visit [https://qweluke.github.io/cqs-2/build/index.html](https://qweluke.github.io/cqs-2/build/index.html) to see the PHPMetrics statistics and PHPUnit code coverage  
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Installation
 
-```markdown
-Syntax highlighted code block
+##### Step 1: Download this project
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+git clone
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+##### Step 2: Download all dependencies
 
-### Jekyll Themes
+```bash
+composer update
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/qweluke/cqs-2/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+##### Step 3: create database and tables 
 
-### Support or Contact
+```bash
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
->>>>>>> 4f8731444d32fecfbd37f81101db155f2b297d90
+### Usage
+
+##### Step 1: run this project locally 
+
+```bash
+php bin/console server:start 0.0.0.0:8085
+```
+
+##### Step 2: go to you browser and run:
+ 
+ http://localhost:8085
